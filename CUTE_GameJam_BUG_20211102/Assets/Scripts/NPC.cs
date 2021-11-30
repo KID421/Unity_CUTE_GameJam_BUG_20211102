@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using System.Collections;
 
 public class NPC : MonoBehaviour
@@ -15,6 +16,9 @@ public class NPC : MonoBehaviour
         "嗨，你是新同學嗎？",
         "請交保護費~"
     };
+
+    [Header("打字事件")]
+    public UnityEvent onType;
 
     public CanvasGroup groupDialogue;
 
@@ -80,6 +84,7 @@ public class NPC : MonoBehaviour
 
             for (int j = 0; j < dialogueContent[i].Length; j++)
             {
+                onType.Invoke();
                 textDialogue.text += dialogueContent[i][j];
                 yield return new WaitForSeconds(dialogueInterval);
             }
